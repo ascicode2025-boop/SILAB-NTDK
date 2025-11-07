@@ -1,0 +1,72 @@
+import React, { useState } from "react";
+import { Form, Button, InputGroup } from "react-bootstrap";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./LoginPage.css";
+import { Link, useNavigate  } from "react-router-dom";
+
+
+function LoginPage() {
+    const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+
+  return (
+    <div className="login-page d-flex justify-content-center align-items-center">
+      <div className="login-container text-center p-4  rounded">
+        {/* Logo IPB */}
+        <img
+          src="/asset/gambarLogo.png"
+          alt="IPB University"
+          className="login-logo mb-3"
+          style={{width: "300px"}}
+        />
+
+        <h5 className="login-title fw-normal mb-4" style={{fontSize: "12px"}}>
+          Sistem Informasi Laboratorium Nutrisi Ternak Daging dan Kerja
+        </h5>
+
+        {/* Form */}
+        <Form>
+          <Form.Group className="mb-3 text-start">
+            <Form.Label>Username</Form.Label>
+            <Form.Control type="text" placeholder="Masukkan username" />
+          </Form.Group>
+
+          <Form.Group className="mb-4 text-start">
+            <Form.Label>Password</Form.Label>
+            <InputGroup>
+              <Form.Control
+                type={showPassword ? "text" : "password"}
+                placeholder="Masukkan password"
+              />
+              <Button
+                variant="light"
+                onClick={() => setShowPassword(!showPassword)}
+                className="border"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </Button>
+            </InputGroup>
+          </Form.Group>
+
+          <Button
+            type="submit"
+            className="w-100 login-btn fw-semibold"
+          >
+            Login
+          </Button>
+        </Form>
+
+       <p className="mt-3 mb-0" style={{ fontSize: "0.85rem" }}>
+            Don’t have an account?{" "}
+            <Link to="/register" className="text-link">
+                Register Here!
+            </Link>
+            </p>
+
+      </div>
+    </div>
+  );
+}
+
+export default LoginPage;
