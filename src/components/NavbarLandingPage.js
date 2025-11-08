@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Container, Nav, Button, Image } from "react-bootstrap";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 import "@fontsource/poppins";
 
 function NavbarLandingPage() {
-  const navigate = useNavigate();
+  const history = useHistory();
   const location = useLocation(); // untuk cek path URL
   const [activeSection, setActiveSection] = useState("beranda");
 
-  // Cek halaman saat ini saat komponen pertama kali dimuat
+  
     useEffect(() => {
-      // Hanya jalankan redirect sekali saat pertama render
+      
       if (window.location.pathname !== "/LandingPage") {
-        navigate("/LandingPage", { replace: true });
+        history.push("/LandingPage");
       }
     }, []); 
 
-  // Update garis Navbar
+
   useEffect(() => {
     const sections = document.querySelectorAll("section[id]");
     const observer = new IntersectionObserver(
@@ -56,7 +56,7 @@ function NavbarLandingPage() {
           <Button
             variant="light"
             className="btn-login mt-2 mt-sm-0"
-            onClick={() => navigate("/login")}
+            onClick={() => history.push("/login")}
           >
             Login
           </Button>
@@ -75,7 +75,7 @@ function NavbarLandingPage() {
             <Nav.Link
               onClick={() => {
                 setActiveSection("beranda");
-                navigate("/LandingPage");
+                history.push("/LandingPage");
               }}
               className={`nav-item-link text-dark ${
                 activeSection === "beranda" ? "active-link" : ""
@@ -87,7 +87,7 @@ function NavbarLandingPage() {
             <Nav.Link
               onClick={() => {
                 setActiveSection("galeriHeader");
-                navigate("/LandingPage");
+                history.push("/LandingPage");
               }}
               href="#galeriHeader"
               className={`nav-item-link text-dark ${
@@ -100,7 +100,7 @@ function NavbarLandingPage() {
             <Nav.Link
               onClick={() => {
                 setActiveSection("profil");
-                navigate("/profile");
+                history.push("/profile");
               }}
               className={`nav-item-link text-dark ${
                 activeSection === "profil" ? "active-link" : ""
